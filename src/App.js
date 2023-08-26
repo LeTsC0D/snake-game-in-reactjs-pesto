@@ -1,99 +1,113 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useInterval } from "./useInterval";
-import {
-  CANVAS_SIZE,
-  SNAKE_START,
-  APPLE_START,
-  SCALE,
-  SPEED,
-  DIRECTIONS
-} from "./constants";
+import "./styles.css";
+
+const c_sz = [500, 500];
+const s_st = [
+  [8, 7],
+  [8, 8]
+];
+const a_st = [8, 3];
+const sc = 40;
+const SPEED = 100;
+const di = {
+  38: [0, -1], // up
+  40: [0, 1], // down
+  37: [-1, 0], // left
+  39: [1, 0] // right
+};
+
 
 const App = () => {
-  const canvasRef = useRef();
-  const [snake, setSnake] = useState(SNAKE_START);
-  const [apple, setApple] = useState(APPLE_START);
+  const cre = useRef();
+  const [sn, setsn] = useState(s_st);
+  const [ap, setap] = useState(a_st);
   const [dir, setDir] = useState([0, -1]);
   const [speed, setSpeed] = useState(null);
-  const [gameOver, setGameOver] = useState(false);
+  const [gmo, setgmo] = useState(false);
 
   useInterval(() => gameLoop(), speed);
 
-  const endGame = () => {
+  const egm = () => {
     setSpeed(null);
-    setGameOver(true);
+    setgmo(true);
   };
 
-  const moveSnake = ({ keyCode }) =>
-    keyCode >= 37 && keyCode <= 40 && setDir(DIRECTIONS[keyCode]);
+  const movesn = ({ kyc }) =>
+    kyc >= 37 && kyc <= 40 && setDir(di[kyc]);
 
-  const createApple = () =>
-    apple.map((_a, i) => Math.floor(Math.random() * (CANVAS_SIZE[i] / SCALE)));
+  const createap = () =>
+    ap.map((_a, i) => Math.floor(Math.random() * (c_sz[i] / sc)));
 
-  const checkCollision = (piece, snk = snake) => {
+  const ccol = (pp, snk = sn) => {
     if (
-      piece[0] * SCALE >= CANVAS_SIZE[0] ||
-      piece[0] < 0 ||
-      piece[1] * SCALE >= CANVAS_SIZE[1] ||
-      piece[1] < 0
+      pp[0] * sc >= c_sz[0] ||
+      pp[0] < 0 ||
+      pp[1] * sc >= c_sz[1] ||
+      pp[1] < 0
     )
       return true;
 
-    for (const segment of snk) {
-      if (piece[0] === segment[0] && piece[1] === segment[1]) return true;
+    for (const seg of snk) {
+      if (pp[0] === seg[0] && pp[1] === seg[1]) return true;
     }
     return false;
   };
 
-  const checkAppleCollision = newSnake => {
-    if (newSnake[0][0] === apple[0] && newSnake[0][1] === apple[1]) {
-      let newApple = createApple();
-      while (checkCollision(newApple, newSnake)) {
-        newApple = createApple();
+  const cacol = newsn => {
+    if (newsn[0][0] === ap[0] && newsn[0][1] === ap[1]) {
+      let newap = createap();
+      while (ccol(newap, newsn)) {
+        newap = createap();
       }
-      setApple(newApple);
+      setap(newap);
       return true;
     }
     return false;
   };
 
   const gameLoop = () => {
-    const snakeCopy = JSON.parse(JSON.stringify(snake));
-    const newSnakeHead = [snakeCopy[0][0] + dir[0], snakeCopy[0][1] + dir[1]];
-    snakeCopy.unshift(newSnakeHead);
-    if (checkCollision(newSnakeHead)) endGame();
-    if (!checkAppleCollision(snakeCopy)) snakeCopy.pop();
-    setSnake(snakeCopy);
+    const scc = JSON.parse(JSON.stringify(sn));
+    const nsnh = [scc[0][0] + dir[0], scc[0][1] + dir[1]];
+    scc.unshift(nsnh);
+    if (ccol(nsnh)) egm();
+    if (!cacol(scc)) scc.pop();
+    setsn(scc);
   };
 
-  const startGame = () => {
-    setSnake(SNAKE_START);
-    setApple(APPLE_START);
+  const stg = () => {
+    setsn(s_st);
+    setap(a_st);
     setDir([0, -1]);
     setSpeed(SPEED);
-    setGameOver(false);
+    setgmo(false);
   };
 
   useEffect(() => {
-    const context = canvasRef.current.getContext("2d");
-    context.setTransform(SCALE, 0, 0, SCALE, 0, 0);
-    context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    context.fillStyle = "pink";
-    snake.forEach(([x, y]) => context.fillRect(x, y, 1, 1));
-    context.fillStyle = "lightblue";
-    context.fillRect(apple[0], apple[1], 1, 1);
-  }, [snake, apple, gameOver]);
+    const ctx = cre.current.getContext("2d");
+    ctx.setTransform(sc, 0, 0, sc, 0, 0);
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.fillStyle = "yellow";
+    ctx.shadowColor = "blue";
+    ctx.shadowBlur = 10;
+    sn.forEach(([x, y]) => ctx.fillRect(x, y, 1, 1));
+    ctx.fillStyle = "lightblue";
+    ctx.fillRect(ap[0], ap[1], 1, 1);
+  }, [sn, ap, gmo]);
 
   return (
-    <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
+    <div role="button" tabIndex="0" onKeyDown={e => movesn(e)} style={{margin:"0px 0px 0px 30vw "}}>
       <canvas
-        style={{ border: "1px solid black" }}
-        ref={canvasRef}
-        width={`${CANVAS_SIZE[0]}px`}
-        height={`${CANVAS_SIZE[1]}px`}
+        style={{ border: "10px solid orange",borderRadius:"10px" }}
+        ref={cre}
+        width={`${c_sz[0]}vw`}
+        height={`${c_sz[1]}vw`}
+       
       />
-      {gameOver && <div>GAME OVER!</div>}
-      <button onClick={startGame}>Start Game</button>
+      <br/>
+      <br/>
+      {gmo && <div style={{margin:"0px 0px 0px 200px "}}>GAME OVER!</div>}
+      <button className="button1" onClick={stg} style={{margin:"0px 0px 0px 200px "}}>Start Game</button>
     </div>
   );
 };
