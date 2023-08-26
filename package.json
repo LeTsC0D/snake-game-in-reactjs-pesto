@@ -2,7 +2,7 @@
   "name": "react-snake",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Lets-coD/snake-game-in-reactjs-pesto",
+  "homepage": "https://Lets-coD.github.io/snake-game-in-reactjs-pesto",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
