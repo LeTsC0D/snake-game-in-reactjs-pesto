@@ -9,7 +9,7 @@ const s_st = [
 ];
 const a_st = [8, 3];
 const sc = 40;
-const SPEED = 100;
+const SPEED = 150;
 const di = {
   38: [0, -1], // up
   40: [0, 1], // down
@@ -33,8 +33,8 @@ const App = () => {
     setgmo(true);
   };
 
-  const movesn = ({ kyc }) =>
-    kyc >= 37 && kyc <= 40 && setDir(di[kyc]);
+  const movesn = ({ keyCode }) =>
+  keyCode >= 37 && keyCode <= 40 && setDir(di[keyCode]);
 
   const createap = () =>
     ap.map((_a, i) => Math.floor(Math.random() * (c_sz[i] / sc)));
@@ -87,9 +87,10 @@ const App = () => {
     const ctx = cre.current.getContext("2d");
     ctx.setTransform(sc, 0, 0, sc, 0, 0);
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = "yellow";
-    ctx.shadowColor = "blue";
-    ctx.shadowBlur = 10;
+    // ctx.fillStyle = "yellow";
+    // ctx.shadowColor = "blue";
+    // ctx.shadowBlur = 10;
+    ctx.fillStyle = "pink";
     sn.forEach(([x, y]) => ctx.fillRect(x, y, 1, 1));
     ctx.fillStyle = "lightblue";
     ctx.fillRect(ap[0], ap[1], 1, 1);
@@ -100,8 +101,8 @@ const App = () => {
       <canvas
         style={{ border: "10px solid orange",borderRadius:"10px" }}
         ref={cre}
-        width={`${c_sz[0]}vw`}
-        height={`${c_sz[1]}vw`}
+        width={`${c_sz[0]}px`}
+        height={`${c_sz[1]}px`}
        
       />
       <br/>
