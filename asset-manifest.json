@@ -1,19 +1,22 @@
 {
   "files": {
-    "main.js": "/snake-game-in-reactjs-pesto/static/js/main.0f45b72f.chunk.js",
-    "main.js.map": "/snake-game-in-reactjs-pesto/static/js/main.0f45b72f.chunk.js.map",
+    "main.css": "/snake-game-in-reactjs-pesto/static/css/main.b6c0dbdf.chunk.css",
+    "main.js": "/snake-game-in-reactjs-pesto/static/js/main.e3cbfab9.chunk.js",
+    "main.js.map": "/snake-game-in-reactjs-pesto/static/js/main.e3cbfab9.chunk.js.map",
     "runtime-main.js": "/snake-game-in-reactjs-pesto/static/js/runtime-main.b17944f4.js",
     "runtime-main.js.map": "/snake-game-in-reactjs-pesto/static/js/runtime-main.b17944f4.js.map",
     "static/js/2.491d0b30.chunk.js": "/snake-game-in-reactjs-pesto/static/js/2.491d0b30.chunk.js",
     "static/js/2.491d0b30.chunk.js.map": "/snake-game-in-reactjs-pesto/static/js/2.491d0b30.chunk.js.map",
     "index.html": "/snake-game-in-reactjs-pesto/index.html",
-    "precache-manifest.497d3d3137751d5c9057406f8e869994.js": "/snake-game-in-reactjs-pesto/precache-manifest.497d3d3137751d5c9057406f8e869994.js",
+    "precache-manifest.acead1187ab231d062d231846e6bfc48.js": "/snake-game-in-reactjs-pesto/precache-manifest.acead1187ab231d062d231846e6bfc48.js",
     "service-worker.js": "/snake-game-in-reactjs-pesto/service-worker.js",
+    "static/css/main.b6c0dbdf.chunk.css.map": "/snake-game-in-reactjs-pesto/static/css/main.b6c0dbdf.chunk.css.map",
     "static/js/2.491d0b30.chunk.js.LICENSE.txt": "/snake-game-in-reactjs-pesto/static/js/2.491d0b30.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b17944f4.js",
     "static/js/2.491d0b30.chunk.js",
-    "static/js/main.0f45b72f.chunk.js"
+    "static/css/main.b6c0dbdf.chunk.css",
+    "static/js/main.e3cbfab9.chunk.js"
   ]
 }
